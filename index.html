@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        font-family: sans-serif;
+        font-size: 16px;
+      }
+      .unordered-list {
+        display: inline-block;
+        margin-left: 0;
+        padding: 0;
+        box-sizing: border-box;
+        color: #212529;
+        font-family: sans-serif;
+        font-size: 0.9rem;
+      }
+
+      .unordered-list:before {
+        content: attr(aria-label);
+        font-weight: bold;
+      }
+
+      /* BASIC LIST */
+      .unordered-list__list {
+        display: inline;
+        color: #212529;
+      }
+      .unordered-list__list:first-of-type {
+        cursor: pointer;
+      }
+
+      .unordered-list__list:hover:first-of-type {
+        text-decoration: underline;
+      }
+      .unordered-list__list::first-letter {
+        color: red;
+      }
+      .unordered-list__list:not(:last-of-type)::after {
+        content: "\002C";
+      }
+      .unordered-list__list:not(.last-li):last-of-type::after {
+        content: "\2026";
+        cursor: pointer;
+      }
+      .unordered-list__list:hover:not(.last--li):last-of-type::after {
+        font-weight: bold;
+      }
+      .last-li::after {
+        content: "\27F5";
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      /* ADVANCED LIST */
+
+      .lists,
+      .list {
+        display: inline;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        color: #212529;
+        font-family: sans-serif;
+        color: #212529;
+        vertical-align: middle;
+        font-size: 0.95em;
+      }
+      .lists *,
+      .list * {
+        font-size: 0.95em;
+      }
+      .lists:before,
+      .list:before {
+        content: attr(aria-label);
+        vertical-align: middle;
+        font-weight: bold;
+      }
+
+      .lists > li,
+      .list {
+        display: inline;
+        vertical-align: middle;
+      }
+      .lists > li:not(:last-of-type)::after {
+        content: "\007C";
+        color: #adb5bd;
+      }
+
+      .list > li {
+        display: inline;
+        margin: 0;
+        padding: 0;
+        vertical-align: middle;
+        font-style: italic;
+      }
+      .list > li:not(:last-of-type)::after {
+        content: "\002C";
+      }
+      .lists__input {
+        display: none;
+      }
+      .list {
+        display: none;
+      }
+
+      .lists__label {
+        cursor: pointer;
+        vertical-align: middle;
+      }
+      .lists__label:hover {
+        text-decoration: underline;
+      }
+      .lists__input:checked + .list {
+        display: inline;
+      }
+    </style>
+    <title>Document</title>
+  </head>
+  <body>
+    <br />
+
+    <fieldset>
+      <legend>BASIC LIST</legend>
+    </fieldset>
+    <br />
+    <fieldset>
+      <legend>ADVANCED LIST</legend>
+    </fieldset>
+    <script type="module">
+      import BasicList from "./basicList.js";
+      import AdvancedList from "./advancedList.js";
+
+      const containers = document.querySelectorAll("fieldset");
+      const basicList = new BasicList({
+        container: containers[0],
+        label: "Other members",
+      });
+
+      basicList.render({
+        container: containers[0],
+        label: "Members",
+      });
+
+      new AdvancedList({
+        container: containers[1],
+        category: "Teams",
+        subcategory: "Members",
+      });
+    </script>
+  </body>
+</html>
